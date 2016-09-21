@@ -171,7 +171,7 @@
     <section class="postShorten-group main-content-wrap">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right" itemscope itemType="http://schema.org/BlogPosting">
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
         <div class="postShorten-wrap">
             
             <div class="postShorten-header">
@@ -189,18 +189,13 @@
     	
     </time>
     
-        <span>发布在 </span>
-        
-    <a class="category-link" href="/categories/开发/">开发</a>
-
-
-    
 </div>
 
             </div>
             
-                <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>####### [注：其中feature/…格式为本地分支名  origin/featue/…为远程分支名]</p>
+                <div class="postShorten-content" itemprop="articleBody">
+                    <a id="more"></a>
+<p>####### [注：其中feature/…格式为本地分支名  origin/featue/…为远程分支名]</p>
 <ul>
 <li>列出本地分支</li>
 </ul>
@@ -209,11 +204,137 @@
 <li>列出所有远程分支</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -r</div></pre></td></tr></table></figure>
+<!--more-->
+<ul>
+<li>列出所有本地分支和远程分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -a</div></pre></td></tr></table></figure>
+<ul>
+<li>新建一个分支，但依然停留在当前分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch feature/xxxx</div></pre></td></tr></table></figure>
+<ul>
+<li>新建一个分支，但依然停留在当前分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch feature/yyyy</div></pre></td></tr></table></figure>
+<ul>
+<li>新建一个分支，并切换到该分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -b feature/yyyy</div></pre></td></tr></table></figure>
+<ul>
+<li>检出远程分支(此命令在本地建立了 一个远程同名分支，并且与其建立了追踪关系)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b feature/xxxx origin/feature/xxxx</div></pre></td></tr></table></figure>
+<ul>
+<li>新建一个分支，与指定的远程分支建立追踪关系</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch --track feature/yyyy origin/feature/xxxx</div></pre></td></tr></table></figure>
+<ul>
+<li>在某个远程分支的基础上，创建一个新的本地分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b feature/zzzz origin/master</div></pre></td></tr></table></figure>
+<ul>
+<li>在本地分支上合并远程分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git merge origin/master</div><div class="line">或者</div><div class="line">$ git rebase origin/master</div></pre></td></tr></table></figure>
+<ul>
+<li>切换到指定分支，并更新工作区</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout feature/yyyy</div></pre></td></tr></table></figure>
+<ul>
+<li>切换到上一个分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -</div></pre></td></tr></table></figure>
+<ul>
+<li>将现有本地分支与指定的远程分支间建立追踪关系</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch --set-upstream-to origin/feature/xxxx  feature/yyyy</div></pre></td></tr></table></figure>
+<ul>
+<li>合并指定分支到当前分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git merge feature/zzzz</div></pre></td></tr></table></figure>
+<ul>
+<li>选择一个commit，合并到当前分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git cherry-pick [commit]</div></pre></td></tr></table></figure>
+<ul>
+<li>删除分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -d feature/zzzz</div></pre></td></tr></table></figure>
+<ul>
+<li>删除远程分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin --delete feature/zzzz</div></pre></td></tr></table></figure>
+<ul>
+<li>将本地分支 推送到远程分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push feature/zzzz:origin/master</div></pre></td></tr></table></figure>
+<ul>
+<li>如果省略远程分支名，则表示本地分支与远程存在追踪关系，但是如果不存在，则会新建，如下<br>将本地的某个分支推送到远程的同名分支上，如果远程不存在，则会新建</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin feature/zzzz</div></pre></td></tr></table></figure>
+<ul>
+<li>如果省略本地分支名，则表示推送一个空的分支到远程分支，即要删除远程分支，如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git push origin :master</div><div class="line">等同于</div><div class="line">$ git push origin --delete master</div></pre></td></tr></table></figure>
+<ul>
+<li>不管远程是否存在对应的分支，都要将本地所有的分支都推送到远程 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push --alll origin</div></pre></td></tr></table></figure>
+<h4 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h4><ul>
+<li><p>列出所有tag</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag</div></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个tag在当前commit</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag [tag]</div></pre></td></tr></table></figure>
+</li>
+<li><p>新建一个tag在指定commit</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag [tag] [commit]</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除本地tag</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag -d [tag]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>删除远程tag</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin :refs/tags/[tagName]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>查看tag信息</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git show [tag]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>提交指定tag</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push [remote] [tag]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>提交所有tag</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push [remote] --tags</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>新建一个分支，指向某个tag</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b [branch] [tag]</div></pre></td></tr></table></figure>
+</li>
+<li><p>git push 不会推送标签，除非使用–tags</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin --tags</div></pre></td></tr></table></figure>
+<p><strong>Warning: Permanently added the RSA host key for IP address ‘192.30.253.112’ to the list of known hosts.解决方案</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/hosts</div></pre></td></tr></table></figure></p>
+<p>然后添加如下代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">192.30.253.112 github.com</div></pre></td></tr></table></figure></p>
+
                     
-                        <a href="/2016/06/17/git常用命令总结/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
                         
+                    
+                    
+                        <p>
+                            <a href="/2016/06/17/git常用命令总结/#post-footer" class="postShorten-excerpt_link link">
+                                注释和共享
+                            </a>
+                        </p>
                     
                 </div>
             
@@ -290,7 +411,7 @@
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://icehulu.com/2016/02/25/使用GithubPages-Hexo搭建免费博客（一）/">
-                            <h3 class="media-heading">我特么搭个博客容易么（一）</h3>
+                            <h3 class="media-heading">使用GithubPages-Hexo搭建免费博客（一）</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -299,7 +420,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><h3 id="关于MarkDown"><a href="#关于MarkDown" class="headerlink" title="关于MarkDown"></a>关于MarkDown</h3><p>Markdown 是一种用来写作的轻量级「标记语言」，它用简洁的语法代替排版，而不像一般我们用的字处理软件 Word 或 Pages 有大量的排版、字体设置。它使我们专心于码字，用「标记」语法，来代替常见的排版格式。</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -307,9 +428,15 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a class="link-unstyled" href="http://icehulu.com/2016/02/26/使用GithubPages-Hexo搭建免费博客（二）/">
+                            <img class="media-image" src="http://7xr7f9.com1.z0.glb.clouddn.com/hexoThemes.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a class="link-unstyled" href="http://icehulu.com/2016/02/26/使用GithubPages-Hexo搭建免费博客（二）/">
-                            <h3 class="media-heading">我特么搭个博客容易么（二）</h3>
+                            <h3 class="media-heading">使用GithubPages-Hexo搭建免费博客（二）</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -318,7 +445,8 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p><img src="http://7xr7f9.com1.z0.glb.clouddn.com/hexoThemes.png" alt="Hexo主题"></p>
+<p>上篇讲到Hexo的安装，本篇继续，先来说说Hexo安装后的文件结构与功能。</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -326,9 +454,15 @@
                 
                 <div class="media">
                     
+                    <div class="media-left">
+                        <a class="link-unstyled" href="http://icehulu.com/2016/03/02/使用GithubPages-Hexo搭建免费博客（三）/">
+                            <img class="media-image" src="http://7xr7f9.com1.z0.glb.clouddn.com/cockosicon.png" width="90" height="90"/>
+                        </a>
+                    </div>
+                    
                     <div class="media-body">
                         <a class="link-unstyled" href="http://icehulu.com/2016/03/02/使用GithubPages-Hexo搭建免费博客（三）/">
-                            <h3 class="media-heading">我特么搭个博客容易么（三）</h3>
+                            <h3 class="media-heading">使用GithubPages-Hexo搭建免费博客（三）</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -337,13 +471,19 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><h2 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h2></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
                 </div>
                 
                 <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="http://icehulu.com/2016/03/10/使用CocoaPods做依赖管理/">
+                            <img class="media-image" src="http://7xr7f9.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-03-15%20%E4%B8%8B%E5%8D%885.42.47.png" width="90" height="90"/>
+                        </a>
+                    </div>
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://icehulu.com/2016/03/10/使用CocoaPods做依赖管理/">
@@ -356,26 +496,8 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://icehulu.com/2016/03/11/iOS9 3DTouch、ShortcutItem、Peek And Pop技术一览/">
-                            <h3 class="media-heading">iOS9 3DTouch、ShortcutItem、Peek And Pop技术一览</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年3月11日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><h2 id="使用CocoaPods做依赖管理"><a href="#使用CocoaPods做依赖管理" class="headerlink" title="使用CocoaPods做依赖管理"></a>使用CocoaPods做依赖管理</h2><p>每种语言发展到一个阶段，就会出现相应的依赖管理工具。本章讲解iOS项目的依赖管理工具CocoaPods。</p>
+<h2 id="CocoaPods简介"><a href="#CocoaPods简介" class="headerlink" title="CocoaPods简介"></a>CocoaPods简介</h2><p>每种语言发展到一个阶段，就会出现相应的依赖管理工具，例如Java语言的Maven，nodejs的npm。随着iOS开发者的增多，业界也出现了为iOS程序提供依赖管理的工具，它的名字叫做：CocoaPods。</p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -394,7 +516,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><h1 id="开发篇"><a href="#开发篇" class="headerlink" title="开发篇"></a>开发篇</h1><h3 id="iOS学习资料大整理"><a href="#iOS学习资料大整理" class="headerlink" title="iOS学习资料大整理"></a><a href="https://github.com/Aufree/trip-to-iOS">iOS学习资料大整理</a></h3></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -413,15 +535,7 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><p>####### [注：其中feature/…格式为本地分支名  origin/featue/…为远程分支名]</p>
-<ul>
-<li>列出本地分支</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch</div></pre></td></tr></table></figure>
-<ul>
-<li>列出所有远程分支</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch -r</div></pre></td></tr></table></figure></div>
+                        <div class="media-content hide-xs font-merryweather"></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -459,13 +573,13 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 8 篇文章
+                找到 7 篇文章
             </p>
         </div>
     </div>
 </div>
         
-<div id="cover" style="background-image:url('/assets/images/cover.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/earth.jpg');"></div>
         <!--SCRIPTS-->
 <script src="/assets/js/script-rt08quwts7iav5x0cfd2ym0gb5qkd1lvrsmwrakxtkhefmaaes4ywkmnjnwf.min.js"></script>
 <!--SCRIPTS END-->
