@@ -5,26 +5,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Faber Howden blog">
-    <title>使用Cocoapods创建私有仓库 - Faber Howden blog</title>
+    <meta name="generator" content="Faber Howden&#39;s blog">
+    <title>使用Cocoapods创建私有仓库 - Faber Howden&#39;s blog</title>
     <meta name="author" content="Faber Howden">
     
         <meta name="keywords" content="iOS,cocoapods">
     
     
+        <link rel="icon" href="http://icehulu.com/assets/images/favicon.png">
+    
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测">
+    <meta name="description" content="Cocoapods最强大的功能就是自己创建podspec，让我们可以设置私有的库。">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="使用Cocoapods创建私有仓库">
 <meta property="og:url" content="http://icehulu.com/2016/08/14/使用Cocoapods创建私有仓库/index.html">
-<meta property="og:site_name" content="Faber Howden blog">
-<meta property="og:description" content="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测">
-<meta property="og:updated_time" content="2016-09-21T06:49:19.000Z">
+<meta property="og:site_name" content="Faber Howden's blog">
+<meta property="og:description" content="Cocoapods最强大的功能就是自己创建podspec，让我们可以设置私有的库。">
+<meta property="og:updated_time" content="2017-03-20T07:08:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Cocoapods创建私有仓库">
-<meta name="twitter:description" content="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测">
+<meta name="twitter:description" content="Cocoapods最强大的功能就是自己创建podspec，让我们可以设置私有的库。">
     
     
         
@@ -64,7 +66,7 @@
 <header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
-        <a class="header-title-link" href="/ ">Faber Howden blog</a>
+        <a class="header-title-link" href="/ ">Faber Howden&#39;s blog</a>
     </div>
     
         
@@ -226,7 +228,70 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测<br><a id="more"></a><br>试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试</p>
+            <p>Cocoapods最强大的功能就是自己创建podspec，让我们可以设置私有的库。</p>
+<a id="more"></a>
+<h2 id="1、什么是podspecs"><a href="#1、什么是podspecs" class="headerlink" title="1、什么是podspecs"></a>1、什么是podspecs</h2><p>podspecs是所有Pods的一个索引，即是一个装了所有公开的第三方库的索引的一个容器。<br>当我们在安装pod时，就已经将这个容器clone到了本地。具体位置在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~/.cocoapods/repos</div></pre></td></tr></table></figure>
+<p>目录下。其中/master文件夹中便是一个所有公开第三方库的索引。打开这个文件夹，我们就可以看到我们常用的各种第三方库的索引，都在这里。</p>
+<p>当我们每次执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod search &apos;somelibrary&apos;</div></pre></td></tr></table></figure>
+<p>这样的操作时，其实就是在master文件夹下去搜索相应的库的索引。这也就是有时候，我们没有及时更新pod的版本时，有的第三方库的最新版本我们无法搜索到的原因。</p>
+<p>因此，如果要创建私有库，首先要创建一个自己的类似于<strong>msater</strong>的索引库–podspecs。</p>
+<p>添加命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pod repo add cocoapods-specs https://git.cimyun.com/ict/cocoapods-specs.git</div></pre></td></tr></table></figure>
+<p>其中<em>cocoapods-specs</em>就是我们自己添加的私有库的文件夹，与<em>master</em>在同级目录下，后面为我们保存的specs的git仓库</p>
+<p>创建完成之后，进入到~/.cocoapods/repos目录下，就可以看到我们创建的cocoapods-specs。</p>
+<p><em>当然这个仓库已经创建完成。所以可以直接将其从git clone到~/.cocoapods/repos目录下。然后在执行pod search时，就可以搜索到里面所有的私有库了</em></p>
+<h2 id="2、创建自己的工程文件"><a href="#2、创建自己的工程文件" class="headerlink" title="2、创建自己的工程文件"></a>2、创建自己的工程文件</h2><p>创建私有库工程文件，cocoapods提供了一个很方便的工具。具体介绍在<a href="http://guides.cocoapods.org/making/using-pod-lib-create" target="_blank" rel="external">这里</a></p>
+<p>使用方法，首先进入一个存放工程的目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod lib create CIMProgressHUD</div></pre></td></tr></table></figure>
+<p>cocoapods会将自己的模板克隆下来，然后有一个创建一个什么样的工程问题索引。</p>
+<p>5个问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">What language do you want to use?? [ Swift / ObjC ]</div><div class="line"> &gt;</div><div class="line"> Would you like to include a demo application with your library? [ Yes / No ]</div><div class="line"> &gt;</div><div class="line"> Which testing frameworks will you use? [ Specta / Kiwi / None ]</div><div class="line"> &gt;</div><div class="line"> Would you like to do view based testing? [ Yes / No ]</div><div class="line"> &gt;</div><div class="line"> What is your class prefix?</div><div class="line"> &gt;</div></pre></td></tr></table></figure>
+<p>1、工程要使用什么语言？2、是否需要一个例子工程？3、选择一个测试框架。4是否基于view的测试。5、类名前缀用什么。回答完之后，它会自动创建工程，并且自动执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
+<p>工程创建完成，自动打开。</p>
+<p>接下来就是向pod文件夹中添加库文件以及资源了，并且配置podspec文件。在pod/CIMProgressHUD/classes文件夹中，可以看到replaceme.m文件。这便是模板工程，提醒，我们将代码文件存放着这里。其他关于图片，xib等资源文件可以存放在Asset文件夹，或者自己随意放在哪里都好，但是需要注意的是，在编写podspec文件时，需要将所有资源文件的存放路径，编写正确。</p>
+<p><strong><em>注意：向pod中添加了新文件或者更新了podspec版本之后，都需要执行一次pod update命令</em></strong></p>
+<h2 id="3、编写podspec文件"><a href="#3、编写podspec文件" class="headerlink" title="3、编写podspec文件"></a>3、编写podspec文件</h2><p>在我们使用pod创建的工程中，podspec文件已经创建好，在目录Podspec Metadata下，便可以看到podspec文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"> #</div><div class="line"> # Be sure to run `pod lib lint CIMProgressHUD.podspec&apos; to ensure this is a</div><div class="line"> # valid spec before submitting.</div><div class="line">#</div><div class="line"> # Any lines starting with a # are optional, but their use is encouraged</div><div class="line"> # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html</div><div class="line">#</div><div class="line"></div><div class="line">Pod::Spec.new do |s|</div><div class="line">  s.name             = &apos;CIMProgressHUD&apos;</div><div class="line">  s.version          = &apos;1.0.0&apos;</div><div class="line">  s.summary          = &apos;希盟自定制加载指示器&apos;</div><div class="line"></div><div class="line"></div><div class="line">  s.description      = &lt;&lt;-DESC</div><div class="line">这里可以添加描述，支持MarkDown</div><div class="line">DESC</div><div class="line"></div><div class="line">  s.homepage         = &apos;https://git.cimyun.com/ict/CIMProgressHUD&apos;</div><div class="line">  # s.screenshots     = &apos;www.example.com/screenshots_1&apos;, &apos;www.example.com/screenshots_2&apos;</div><div class="line">  s.license          = &#123; :type =&gt; &apos;MIT&apos;, :file =&gt; &apos;LICENSE&apos; &#125;</div><div class="line">  s.author           = &#123; &apos;iCalabash&apos; =&gt; &apos;magifend@163.com&apos; &#125;</div><div class="line">  s.source           = &#123; :git =&gt; &apos;https://git.cimyun.com/ict/CIMProgressHUD.git&apos;, :tag =&gt; s.version.to_s &#125;</div><div class="line">  # s.social_media_url = &apos;https://twitter.com/&lt;TWITTER_USERNAME&gt;&apos;</div><div class="line"></div><div class="line">  s.ios.deployment_target = &apos;8.0&apos;</div><div class="line"></div><div class="line">  # 这里是项目文件的路径</div><div class="line">  s.source_files = &apos;CIMProgressHUD/Classes/*&apos;</div><div class="line">  </div><div class="line">  # 这里存放资源文件 图片 xib storyboard等</div><div class="line">   s.resource_bundles = &#123;</div><div class="line">     &apos;CIMProgressHUD&apos; =&gt; [&apos;CIMProgressHUD/Assets/*.png&apos;]</div><div class="line">   &#125;</div><div class="line"></div><div class="line">  # s.public_header_files = &apos;Pod/Classes/**/*.h&apos;</div><div class="line">  # s.frameworks = &apos;UIKit&apos;, &apos;MapKit&apos;</div><div class="line">  # 是否有依赖库</div><div class="line">  # s.dependency &apos;AFNetworking&apos;, &apos;~&gt; 2.3&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<p>由</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.source           = &#123; :git =&gt; &apos;https://git.cimyun.com/ict/CIMProgressHUD.git&apos;, :tag =&gt; s.version.to_s &#125;</div></pre></td></tr></table></figure>
+<p><strong>可以看到，cocopods的版本号是依据与版本号对应的tag去git仓库寻找的资源文件，因此我们在上传git时，必须打上与版本号对应的tag</strong></p>
+<p>编辑完podspec文件后，需要验证一下这个文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod lib lint</div></pre></td></tr></table></figure>
+<p>当看到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">passed validation</div></pre></td></tr></table></figure>
+<p>时，说明验证通过。</p>
+<h3 id="将项目push到远程仓库"><a href="#将项目push到远程仓库" class="headerlink" title="将项目push到远程仓库"></a>将项目push到远程仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ git add .</div><div class="line">$ git commit -s -m &quot;Initial Commit of Library&quot;</div><div class="line">$ git remote add origin git@git.cimyun.com:ict/CIMProgressHUD.git           #添加远端仓库</div><div class="line">$ git push origin master     #提交到远端仓库</div></pre></td></tr></table></figure>
+<p>不要忘记打上与版本号对应的tag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git tag -m &quot;first release&quot; 1.0.0</div><div class="line">$ git push --tags     #推送tag到远端仓库</div></pre></td></tr></table></figure>
+<h2 id="4、已有工程创建podspec文件"><a href="#4、已有工程创建podspec文件" class="headerlink" title="4、已有工程创建podspec文件"></a>4、已有工程创建podspec文件</h2><p>如果不想使用cocopods创建的模板工程，我们也可以在现有工程中，创建podspec文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pod spec create [工程名] [工程git地址]</div></pre></td></tr></table></figure>
+<p>执行完之后，就在项目中创建了一个podspec文件，然后按第三步中的方法，进行编辑，验证就ok</p>
+<h2 id="5、本地测试podspec文件"><a href="#5、本地测试podspec文件" class="headerlink" title="5、本地测试podspec文件"></a>5、本地测试podspec文件</h2><p>新建一个使用cocopods的测试工程，在Podfile中添加</p>
+<p>指定路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod &apos;CIMProgerssHUD&apos;, :path =&gt; &apos;~/**/CIMProgressHUD&apos;</div></pre></td></tr></table></figure>
+<p>或者指定podspec</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod &apos;CIMProgerssHUD&apos;, :podspec =&gt; &apos;~/**/CIMProgressHUD/CIMProgressHUD.podspec&apos;</div></pre></td></tr></table></figure>
+<p>然后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
+<p>打开项目工程，可以看到库文件都被加载到Pods子项目中了，不过它们并没有在Pods目录下，而是跟测试项目一样存在于Development Pods/PodTestLibrary中，这是因为我们是在本地测试，而没有把podspec文件添加到Spec Repo中的缘故</p>
+<h2 id="6、向cocoapods-specs中提交podspec文件"><a href="#6、向cocoapods-specs中提交podspec文件" class="headerlink" title="6、向cocoapods-specs中提交podspec文件"></a><strong>6、向cocoapods-specs中提交podspec文件</strong></h2><p>当验证podspec文件无误后，需要将其提交到私有的cocopods-specs文件夹中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pod repo push cocoapods-specs CIMProgressHUD.podspec</div></pre></td></tr></table></figure>
+<p>完成之后，这个组件就添加到我们私有的cocoapods-specs中了，进入到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">~/.cocoapods/repos/cocoapods-specs</div></pre></td></tr></table></figure></p>
+<p>目录中就可以看到CIMProgressHUD的文件夹，同时这个命令也将其push到了远程git仓库</p>
+<p>这时我们再使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod search CIMProgressHUD</div></pre></td></tr></table></figure>
+<p>就可以像搜索其他第三方库一样的搜索到了。</p>
+<h2 id="7、使用私有库"><a href="#7、使用私有库" class="headerlink" title="7、使用私有库"></a>7、使用私有库</h2><p>使用私有库的方式我在这里主要列举了两种情况，下面针对这两中情况的具体注意项我这里稍微说明一下。 第一种,正常使用私有库的情况，即在Podfile中引用私有库 这种方式最简单，就是通过在Podfile开头列举说所有私有库的位置以及Cocoapods位置即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># Podfile文件</div><div class="line"># 公有仓库</div><div class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;  </div><div class="line"># 私有仓库</div><div class="line">source &apos;https://git.cimyun.com/ict/cocoapods-specs.git&apos;</div></pre></td></tr></table></figure>
+<p>第二种，在私有库中引用私有库，即在Podspec文件中依赖(dependency)私有库 这种情况就比较麻烦一点，因为毕竟Podspec文件中并没有指明私有仓库地址的地方。那么肯定就不在Podspec文件里面指明私有仓库的地方。而是在验证和上传私有库的时候进行指明。即在下面这两条命令中进行指明：pod lib lint 项目名.podspec –sources=<a href="https://github.com/CocoaPods/Specs.git,https://git.cimyun.com/ict/cocoapods-specs.git以及pod" target="_blank" rel="external">https://github.com/CocoaPods/Specs.git,https://git.cimyun.com/ict/cocoapods-specs.git以及pod</a> repo push –source=<a href="https://github.com/CocoaPods/Specs.git,https://git.cimyun.com/ict/cocoapods-specs.git,要不然你在检验项目以及提交项目过程中就会出现Error的情况。" target="_blank" rel="external">https://github.com/CocoaPods/Specs.git,https://git.cimyun.com/ict/cocoapods-specs.git,要不然你在检验项目以及提交项目过程中就会出现Error的情况。</a></p>
+<p>但是这两种情况还是有点不同的，第一种情况是可以采用开发者模式，而第二种情况不能采用开发者模式，只能通过打tag之后才能进行使用，所以在使用第二种情况下最好是测试好之后打完tag再进行引用。</p>
+<h2 id="8、关于资源文件的问题"><a href="#8、关于资源文件的问题" class="headerlink" title="8、关于资源文件的问题"></a>8、关于资源文件的问题</h2><p>由于使用者在使用cocopods中，可能涉及到swift与Objective-C混编的问题，所以我们的私有库文件可能被编为静态库，也有可能被编为动态库，这就容易导致，我们在自己的私有库文件中引用资源文件会找不到。</p>
+<p>新版的cocoapods，引用图片，xib，stroyboard等资源文件建议使用类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]]</div><div class="line">                                                 pathForResource:@&quot;CIMProgressHUD&quot;</div><div class="line">                                                 ofType:@&quot;bundle&quot;]];</div><div class="line">    UIImage * successImage = [UIImage imageNamed:HUD_IMAGE_SUCCESS inBundle:bundle compatibleWithTraitCollection:nil];</div></pre></td></tr></table></figure>
+<p>这样的形式</p>
 
             
     
@@ -238,7 +303,7 @@
             
             
             <div class="photo-box">
-                <a class="photo-box-inner fancybox" data-fancybox-group="gallery-citck3s580008xrsogrpvs5ox"
+                <a class="photo-box-inner fancybox" data-fancybox-group="gallery-ciw4rg42h0008ewsoirg6v8i5"
                    title="New York" href="http://icehulu.com/2016/08/14/使用Cocoapods创建私有仓库/cocoapodicon.png">
                     <img class="photo" src="http://icehulu.com/2016/08/14/使用Cocoapods创建私有仓库/cocoapodicon.png" itemprop="image">
                 </a>
@@ -246,7 +311,7 @@
             
             
             <div class="photo-box">
-                <a class="photo-box-inner fancybox" data-fancybox-group="gallery-citck3s580008xrsogrpvs5ox"
+                <a class="photo-box-inner fancybox" data-fancybox-group="gallery-ciw4rg42h0008ewsoirg6v8i5"
                    title="Paris" href="http://icehulu.com/2016/08/14/使用Cocoapods创建私有仓库/image-4.png">
                     <img class="photo" src="http://icehulu.com/2016/08/14/使用Cocoapods创建私有仓库/image-4.png" itemprop="image">
                 </a>
@@ -271,7 +336,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/29/关于升级macOS无任何来源的问题/"  data-tooltip="关于升级macOS无任何来源的问题">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -341,7 +406,7 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2016 Faber Howden. All Rights Reserved.
+        Copyrights &copy; 2017 Faber Howden. All Rights Reserved.
     </span>
 </footer>
 
@@ -353,7 +418,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/11/29/关于升级macOS无任何来源的问题/"  data-tooltip="关于升级macOS无任何来源的问题">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -605,7 +670,11 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
+                        <div class="media-content hide-xs font-merryweather"><p>####### [注：其中feature/…格式为本地分支名  origin/featue/…为远程分支名]</p>
+<ul>
+<li>列出本地分支</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch</div></pre></td></tr></table></figure></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -630,7 +699,26 @@
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><p>测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测<br></div>
+                        <div class="media-content hide-xs font-merryweather"><p>Cocoapods最强大的功能就是自己创建podspec，让我们可以设置私有的库。</p></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://icehulu.com/2016/11/29/关于升级macOS无任何来源的问题/">
+                            <h3 class="media-heading">关于升级macOS无任何来源的问题</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年11月29日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -643,13 +731,13 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 7 篇文章
+                找到 8 篇文章
             </p>
         </div>
     </div>
 </div>
         
-<div id="cover" style="background-image:url('/assets/images/earth.jpg');"></div>
+<div id="cover" style="background-image:url('/assets/images/backair.jpg');"></div>
         <!--SCRIPTS-->
 <script src="/assets/js/script-rt08quwts7iav5x0cfd2ym0gb5qkd1lvrsmwrakxtkhefmaaes4ywkmnjnwf.min.js"></script>
 <!--SCRIPTS END-->
