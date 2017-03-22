@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://icehulu.com/"/>
-  <updated>2016-11-29T07:30:25.000Z</updated>
-  <id>http://icehulu.com/</id>
+  <link href="http://lo-ol.cc/"/>
+  <updated>2017-03-22T16:19:59.000Z</updated>
+  <id>http://lo-ol.cc/</id>
   
   <author>
     <name>Faber Howden</name>
@@ -16,33 +16,69 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>关于升级macOS无任何来源的问题</title>
-    <link href="http://icehulu.com/2016/11/29/%E5%85%B3%E4%BA%8E%E5%8D%87%E7%BA%A7macOS%E6%97%A0%E4%BB%BB%E4%BD%95%E6%9D%A5%E6%BA%90%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://icehulu.com/2016/11/29/关于升级macOS无任何来源的问题/</id>
-    <published>2016-11-29T07:26:32.000Z</published>
-    <updated>2016-11-29T07:30:25.000Z</updated>
+    <title>使用cocoapods创建公开的第三方库</title>
+    <link href="http://lo-ol.cc/2017/03/23/cocoapods-public/"/>
+    <id>http://lo-ol.cc/2017/03/23/cocoapods-public/</id>
+    <published>2017-03-22T16:16:22.000Z</published>
+    <updated>2017-03-22T16:19:59.000Z</updated>
     
-    <content type="html"><![CDATA[<p>在 macOS Sieria (10.12)中，系统隐藏掉了任何来源，解决办法：</p>
+    <content type="html"><![CDATA[<p>通过了解使用cocopods创建私有库，可以知道，如果我们要创建私有库，其实就是将自己的库文件放在开源的github上<a id="more"></a>， 然后将我们的podspec文件，添加进cocopods的master文件夹内。</p>
+<p>新版的cocopods，其团队开发了trunk服务，主要功能就是为了防止个人的pod被其他人更改。</p>
+<h2 id="1、注册trunk"><a href="#1、注册trunk" class="headerlink" title="1、注册trunk"></a>1、注册trunk</h2><p>想要把我们自己的podspec文件放进master，首先要注册trunk！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod trunk register youremail@mail.com &apos;用户名&apos; --description=&apos;myMac&apos; --verbose</div></pre></td></tr></table></figure>
+<p>description一般我们会加上当前电脑的标示。<br>[–verbose]可以输入详细的debug信息，方便出错时查看。</p>
+<p>注册后，cocopods会向你的邮箱发送验证连接，点击后就注册成功了。<br>可以使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod trunk me</div></pre></td></tr></table></figure>
+<p>命令查看注册信息。</p>
+<h2 id="2、创建工程"><a href="#2、创建工程" class="headerlink" title="2、创建工程"></a>2、创建工程</h2><p>第二步就是我们创建工程，以及创建podspec文件，当然开源的话，就是要把我们创建的工程上传到github，<em>不要忘记打上与版本对应的tag</em></p>
+<h2 id="3、上传podspec文件到master"><a href="#3、上传podspec文件到master" class="headerlink" title="3、上传podspec文件到master"></a>3、上传podspec文件到master</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod trunk push 项目名.podspec</div></pre></td></tr></table></figure>
+<p>这条命令做了三件事情<br>1、验证你本地的podspec文件<br>2、上传你的podspec文件到trunk<br>3、将你的podspec文件转换成trunk需要的json文件</p>
+<p>成功之后我们的第三方库就做成了，cocopods会在Twitter上@你，如果你添加了Twitter账户的话。</p>
+<p>上传trunk成功之后，我们本地的cocopods还没有更新，执行【pod setup】吧</p>
+<h2 id="4、将其他人加入到你的pod一起开发"><a href="#4、将其他人加入到你的pod一起开发" class="headerlink" title="4、将其他人加入到你的pod一起开发"></a>4、将其他人加入到你的pod一起开发</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod trunk add-owner 项目名 他人用户邮箱</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过了解使用cocopods创建私有库，可以知道，如果我们要创建私有库，其实就是将自己的库文件放在开源的github上
+    
+    </summary>
+    
+      <category term="开发" scheme="http://lo-ol.cc/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="cocoaPods" scheme="http://lo-ol.cc/tags/cocoaPods/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于升级macOS无任何来源的问题</title>
+    <link href="http://lo-ol.cc/2016/11/29/%E5%85%B3%E4%BA%8E%E5%8D%87%E7%BA%A7macOS%E6%97%A0%E4%BB%BB%E4%BD%95%E6%9D%A5%E6%BA%90%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://lo-ol.cc/2016/11/29/关于升级macOS无任何来源的问题/</id>
+    <published>2016-11-29T07:26:32.000Z</published>
+    <updated>2017-03-22T16:05:21.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 macOS Sieria (10.12)中，系统隐藏掉了任何来源，解决办法：<br><a id="more"></a></p>
 <p>打开终端，执行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo spctl --master-disable</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;在 macOS Sieria (10.12)中，系统隐藏掉了任何来源，解决办法：&lt;/p&gt;
-&lt;p&gt;打开终端，执行&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class
+      &lt;p&gt;在 macOS Sieria (10.12)中，系统隐藏掉了任何来源，解决办法：&lt;br&gt;
     
     </summary>
     
+    
+      <category term="os" scheme="http://lo-ol.cc/tags/os/"/>
     
   </entry>
   
   <entry>
     <title>使用Cocoapods创建私有仓库</title>
-    <link href="http://icehulu.com/2016/08/14/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
-    <id>http://icehulu.com/2016/08/14/使用Cocoapods创建私有仓库/</id>
+    <link href="http://lo-ol.cc/2016/08/14/%E4%BD%BF%E7%94%A8Cocoapods%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93/"/>
+    <id>http://lo-ol.cc/2016/08/14/使用Cocoapods创建私有仓库/</id>
     <published>2016-08-14T01:47:13.000Z</published>
-    <updated>2017-03-20T07:08:37.000Z</updated>
+    <updated>2017-03-22T16:04:35.000Z</updated>
     
     <content type="html"><![CDATA[<p>Cocoapods最强大的功能就是自己创建podspec，让我们可以设置私有的库。</p>
 <a id="more"></a>
@@ -116,26 +152,27 @@
     
     </summary>
     
-      <category term="开发" scheme="http://icehulu.com/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="http://lo-ol.cc/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="cocoapods" scheme="http://icehulu.com/tags/cocoapods/"/>
+      <category term="cocoaPods" scheme="http://lo-ol.cc/tags/cocoaPods/"/>
     
   </entry>
   
   <entry>
     <title>git常用命令总结</title>
-    <link href="http://icehulu.com/2016/06/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
-    <id>http://icehulu.com/2016/06/17/git常用命令总结/</id>
+    <link href="http://lo-ol.cc/2016/06/17/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
+    <id>http://lo-ol.cc/2016/06/17/git常用命令总结/</id>
     <published>2016-06-17T03:54:42.000Z</published>
-    <updated>2017-03-20T03:13:10.000Z</updated>
+    <updated>2017-03-22T16:06:50.000Z</updated>
     
-    <content type="html"><![CDATA[<p>####### [注：其中feature/…格式为本地分支名  origin/featue/…为远程分支名]</p>
+    <content type="html"><![CDATA[<p>总结下git常用命令</p>
+<a id="more"></a>
+<p>####### [注：其中feature/…格式为本地分支名  origin/featue/…为远程分支名]</p>
 <ul>
 <li>列出本地分支</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch</div></pre></td></tr></table></figure>
-<a id="more"></a>
 <ul>
 <li>列出所有远程分支</li>
 </ul>
@@ -265,28 +302,25 @@
     
     <summary type="html">
     
-      &lt;p&gt;####### [注：其中feature/…格式为本地分支名  origin/featue/…为远程分支名]&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;列出本地分支&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ git branch&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+      &lt;p&gt;总结下git常用命令&lt;/p&gt;
     
     </summary>
     
     
-      <category term="git" scheme="http://icehulu.com/tags/git/"/>
+      <category term="git" scheme="http://lo-ol.cc/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>优秀网站收藏</title>
-    <link href="http://icehulu.com/2016/03/28/%E4%BC%98%E7%A7%80%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/"/>
-    <id>http://icehulu.com/2016/03/28/优秀网站收藏/</id>
+    <link href="http://lo-ol.cc/2016/03/28/%E4%BC%98%E7%A7%80%E7%BD%91%E7%AB%99%E6%94%B6%E8%97%8F/"/>
+    <id>http://lo-ol.cc/2016/03/28/优秀网站收藏/</id>
     <published>2016-03-28T09:21:06.000Z</published>
-    <updated>2016-09-21T06:51:06.000Z</updated>
+    <updated>2017-03-22T16:29:10.000Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="开发篇"><a href="#开发篇" class="headerlink" title="开发篇"></a>开发篇</h1><h3 id="iOS学习资料大整理"><a href="#iOS学习资料大整理" class="headerlink" title="iOS学习资料大整理"></a><a href="https://github.com/Aufree/trip-to-iOS" target="_blank" rel="external">iOS学习资料大整理</a></h3><a id="more"></a>
-<h3 id="开源项目以及学习资料总结-好多好多…"><a href="#开源项目以及学习资料总结-好多好多…" class="headerlink" title="开源项目以及学习资料总结(好多好多…)"></a><a href="https://github.com/Tim9Liu9/TimLiu-iOS" target="_blank" rel="external">开源项目以及学习资料总结(好多好多…)</a></h3><h3 id="GitHub前50名的Objective-C网络相关库"><a href="#GitHub前50名的Objective-C网络相关库" class="headerlink" title="GitHub前50名的Objective-C网络相关库"></a><a href="https://github.com/coderyi/blog/blob/master/articles/2015/1108_Network_Rep_Ranking.md" target="_blank" rel="external">GitHub前50名的Objective-C网络相关库</a></h3><h3 id="一堆动画"><a href="#一堆动画" class="headerlink" title="一堆动画"></a><a href="https://github.com/YouXianMing/YoCelsius" target="_blank" rel="external">一堆动画</a></h3><h3 id="开源iOSAPPs"><a href="#开源iOSAPPs" class="headerlink" title="开源iOSAPPs"></a><a href="https://github.com/dkhamsing/open-source-ios-apps" target="_blank" rel="external">开源iOSAPPs</a></h3><h3 id="OC主题站"><a href="#OC主题站" class="headerlink" title="OC主题站"></a><a href="https://www.objc.io/" target="_blank" rel="external">OC主题站</a></h3><p>中文版可以看这里<a href="http://www.objccn.io/" target="_blank" rel="external">objc中国</a></p>
+    <content type="html"><![CDATA[<p>整理下收藏的优秀网站</p>
+<a id="more"></a>
+<h1 id="开发篇"><a href="#开发篇" class="headerlink" title="开发篇"></a>开发篇</h1><h3 id="iOS学习资料大整理"><a href="#iOS学习资料大整理" class="headerlink" title="iOS学习资料大整理"></a><a href="https://github.com/Aufree/trip-to-iOS" target="_blank" rel="external">iOS学习资料大整理</a></h3><h3 id="开源项目以及学习资料总结-好多好多…"><a href="#开源项目以及学习资料总结-好多好多…" class="headerlink" title="开源项目以及学习资料总结(好多好多…)"></a><a href="https://github.com/Tim9Liu9/TimLiu-iOS" target="_blank" rel="external">开源项目以及学习资料总结(好多好多…)</a></h3><h3 id="GitHub前50名的Objective-C网络相关库"><a href="#GitHub前50名的Objective-C网络相关库" class="headerlink" title="GitHub前50名的Objective-C网络相关库"></a><a href="https://github.com/coderyi/blog/blob/master/articles/2015/1108_Network_Rep_Ranking.md" target="_blank" rel="external">GitHub前50名的Objective-C网络相关库</a></h3><h3 id="一堆动画"><a href="#一堆动画" class="headerlink" title="一堆动画"></a><a href="https://github.com/YouXianMing/YoCelsius" target="_blank" rel="external">一堆动画</a></h3><h3 id="开源iOSAPPs"><a href="#开源iOSAPPs" class="headerlink" title="开源iOSAPPs"></a><a href="https://github.com/dkhamsing/open-source-ios-apps" target="_blank" rel="external">开源iOSAPPs</a></h3><h3 id="OC主题站"><a href="#OC主题站" class="headerlink" title="OC主题站"></a><a href="https://www.objc.io/" target="_blank" rel="external">OC主题站</a></h3><p>中文版可以看这里<a href="http://www.objccn.io/" target="_blank" rel="external">objc中国</a></p>
 <h3 id="designcode"><a href="#designcode" class="headerlink" title="designcode"></a><a href="https://designcode.io/" target="_blank" rel="external">designcode</a></h3><p><img src="http://7xr7f9.com1.z0.glb.clouddn.com/leancode2016-03-29.png" alt=""><br>想学sketch+iOS开发的可以入手一套正版教材，一个华裔大神的网站。</p>
 <h3 id="cocoachina"><a href="#cocoachina" class="headerlink" title="cocoachina"></a><a href="http://www.cocoachina.com/" target="_blank" rel="external">cocoachina</a></h3><h3 id="code4app"><a href="#code4app" class="headerlink" title="code4app"></a><a href="http://www.code4app.com/" target="_blank" rel="external">code4app</a></h3><h3 id="github-stackoverflow"><a href="#github-stackoverflow" class="headerlink" title="github stackoverflow"></a><a href="http://github.com" target="_blank" rel="external">github</a> <a href="http://www.stackoverflow.com" target="_blank" rel="external">stackoverflow</a></h3><h3 id="那些著名或非著名的iOS面试题－前编"><a href="#那些著名或非著名的iOS面试题－前编" class="headerlink" title="那些著名或非著名的iOS面试题－前编"></a><a href="http://www.jianshu.com/p/8f16613861fa?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note&amp;utm_source=qq" target="_blank" rel="external">那些著名或非著名的iOS面试题－前编</a></h3><h1 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h1><h3 id="Sketch"><a href="#Sketch" class="headerlink" title="Sketch"></a><a href="http://www.sketchapp.com/" target="_blank" rel="external">Sketch</a></h3><p>比Photoshop好用的UI设计工具<br>信息获取来源<a href="http://get.ftqq.com/3.get" target="_blank" rel="external">这里</a></p>
 <p>APP icon快速生成插件<a href="https://github.com/kaphacius/IconMaker" target="_blank" rel="external">https://github.com/kaphacius/IconMaker</a></p>
@@ -301,29 +335,29 @@
     
     <summary type="html">
     
-      &lt;h1 id=&quot;开发篇&quot;&gt;&lt;a href=&quot;#开发篇&quot; class=&quot;headerlink&quot; title=&quot;开发篇&quot;&gt;&lt;/a&gt;开发篇&lt;/h1&gt;&lt;h3 id=&quot;iOS学习资料大整理&quot;&gt;&lt;a href=&quot;#iOS学习资料大整理&quot; class=&quot;headerlink&quot; title=&quot;iOS学习资料大整理&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://github.com/Aufree/trip-to-iOS&quot;&gt;iOS学习资料大整理&lt;/a&gt;&lt;/h3&gt;
+      &lt;p&gt;整理下收藏的优秀网站&lt;/p&gt;
     
     </summary>
     
-      <category term="收藏" scheme="http://icehulu.com/categories/%E6%94%B6%E8%97%8F/"/>
+      <category term="收藏" scheme="http://lo-ol.cc/categories/%E6%94%B6%E8%97%8F/"/>
     
     
-      <category term="技术" scheme="http://icehulu.com/tags/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="http://lo-ol.cc/tags/%E6%8A%80%E6%9C%AF/"/>
     
-      <category term="网站" scheme="http://icehulu.com/tags/%E7%BD%91%E7%AB%99/"/>
+      <category term="网站" scheme="http://lo-ol.cc/tags/%E7%BD%91%E7%AB%99/"/>
     
   </entry>
   
   <entry>
     <title>使用CocoaPods做依赖管理</title>
-    <link href="http://icehulu.com/2016/03/10/%E4%BD%BF%E7%94%A8CocoaPods%E5%81%9A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
-    <id>http://icehulu.com/2016/03/10/使用CocoaPods做依赖管理/</id>
+    <link href="http://lo-ol.cc/2016/03/10/%E4%BD%BF%E7%94%A8CocoaPods%E5%81%9A%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/"/>
+    <id>http://lo-ol.cc/2016/03/10/使用CocoaPods做依赖管理/</id>
     <published>2016-03-10T06:57:04.000Z</published>
-    <updated>2016-09-21T06:56:19.000Z</updated>
+    <updated>2017-03-22T15:43:19.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="使用CocoaPods做依赖管理"><a href="#使用CocoaPods做依赖管理" class="headerlink" title="使用CocoaPods做依赖管理"></a>使用CocoaPods做依赖管理</h2><p>每种语言发展到一个阶段，就会出现相应的依赖管理工具。本章讲解iOS项目的依赖管理工具CocoaPods。</p>
-<h2 id="CocoaPods简介"><a href="#CocoaPods简介" class="headerlink" title="CocoaPods简介"></a>CocoaPods简介</h2><p>每种语言发展到一个阶段，就会出现相应的依赖管理工具，例如Java语言的Maven，nodejs的npm。随着iOS开发者的增多，业界也出现了为iOS程序提供依赖管理的工具，它的名字叫做：CocoaPods。</p>
+    <content type="html"><![CDATA[<p>每种语言发展到一个阶段，就会出现相应的依赖管理工具。本章讲解iOS项目的依赖管理工具CocoaPods。</p>
 <a id="more"></a>
+<h2 id="CocoaPods简介"><a href="#CocoaPods简介" class="headerlink" title="CocoaPods简介"></a>CocoaPods简介</h2><p>每种语言发展到一个阶段，就会出现相应的依赖管理工具，例如Java语言的Maven，nodejs的npm。随着iOS开发者的增多，业界也出现了为iOS程序提供依赖管理的工具，它的名字叫做：CocoaPods。</p>
 <p>CocoaPods项目的源码在Github上管理。该项目开始于2011年8月，经过多年发展，现在已经成为iOS开发事实上的依赖管理标准工具。开发iOS项目不可避免地要使用第三方开源库，CocoaPods的出现使得我们可以节省设置和更新第三方开源库的时间。</p>
 <p>在我开发猿题库客户端时，使用了24个第三方开源库。在没有使用CocoaPods以前，我需要:</p>
 <ul>
@@ -417,24 +451,23 @@ pod update --no-repo-update
     
     <summary type="html">
     
-      &lt;h2 id=&quot;使用CocoaPods做依赖管理&quot;&gt;&lt;a href=&quot;#使用CocoaPods做依赖管理&quot; class=&quot;headerlink&quot; title=&quot;使用CocoaPods做依赖管理&quot;&gt;&lt;/a&gt;使用CocoaPods做依赖管理&lt;/h2&gt;&lt;p&gt;每种语言发展到一个阶段，就会出现相应的依赖管理工具。本章讲解iOS项目的依赖管理工具CocoaPods。&lt;/p&gt;
-&lt;h2 id=&quot;CocoaPods简介&quot;&gt;&lt;a href=&quot;#CocoaPods简介&quot; class=&quot;headerlink&quot; title=&quot;CocoaPods简介&quot;&gt;&lt;/a&gt;CocoaPods简介&lt;/h2&gt;&lt;p&gt;每种语言发展到一个阶段，就会出现相应的依赖管理工具，例如Java语言的Maven，nodejs的npm。随着iOS开发者的增多，业界也出现了为iOS程序提供依赖管理的工具，它的名字叫做：CocoaPods。&lt;/p&gt;
+      &lt;p&gt;每种语言发展到一个阶段，就会出现相应的依赖管理工具。本章讲解iOS项目的依赖管理工具CocoaPods。&lt;/p&gt;
     
     </summary>
     
-      <category term="iOS" scheme="http://icehulu.com/categories/iOS/"/>
+      <category term="iOS" scheme="http://lo-ol.cc/categories/iOS/"/>
     
-      <category term="工具" scheme="http://icehulu.com/categories/iOS/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="http://lo-ol.cc/categories/iOS/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="CocoaPods" scheme="http://icehulu.com/tags/CocoaPods/"/>
+      <category term="CocoaPods" scheme="http://lo-ol.cc/tags/CocoaPods/"/>
     
   </entry>
   
   <entry>
     <title>使用GithubPages-Hexo搭建免费博客（三）</title>
-    <link href="http://icehulu.com/2016/03/02/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/"/>
-    <id>http://icehulu.com/2016/03/02/使用GithubPages-Hexo搭建免费博客（三）/</id>
+    <link href="http://lo-ol.cc/2016/03/02/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+    <id>http://lo-ol.cc/2016/03/02/使用GithubPages-Hexo搭建免费博客（三）/</id>
     <published>2016-03-02T15:52:40.000Z</published>
     <updated>2016-09-21T06:53:05.000Z</updated>
     
@@ -460,26 +493,25 @@ pod update --no-repo-update
     
     </summary>
     
-      <category term="装逼利器" scheme="http://icehulu.com/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/"/>
+      <category term="装逼利器" scheme="http://lo-ol.cc/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/"/>
     
-      <category term="Hexo" scheme="http://icehulu.com/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/Hexo/"/>
+      <category term="Hexo" scheme="http://lo-ol.cc/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/Hexo/"/>
     
     
-      <category term="博客" scheme="http://icehulu.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="http://lo-ol.cc/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="Hexo" scheme="http://icehulu.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://lo-ol.cc/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>使用GithubPages-Hexo搭建免费博客（二）</title>
-    <link href="http://icehulu.com/2016/02/26/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
-    <id>http://icehulu.com/2016/02/26/使用GithubPages-Hexo搭建免费博客（二）/</id>
+    <link href="http://lo-ol.cc/2016/02/26/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>http://lo-ol.cc/2016/02/26/使用GithubPages-Hexo搭建免费博客（二）/</id>
     <published>2016-02-26T08:37:14.000Z</published>
-    <updated>2016-09-21T06:53:23.000Z</updated>
+    <updated>2017-03-22T15:49:18.000Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="http://7xr7f9.com1.z0.glb.clouddn.com/hexoThemes.png" alt="Hexo主题"></p>
-<p>上篇讲到Hexo的安装，本篇继续，先来说说Hexo安装后的文件结构与功能。</p>
+    <content type="html"><![CDATA[<p>上篇讲到Hexo的安装，本篇继续，先来说说Hexo安装后的文件结构与功能。</p>
 <a id="more"></a>
 <h2 id="HEXO博客配置"><a href="#HEXO博客配置" class="headerlink" title="HEXO博客配置"></a>HEXO博客配置</h2><h4 id="1-Hexo设置"><a href="#1-Hexo设置" class="headerlink" title="1. Hexo设置"></a>1. Hexo设置</h4><p>打开根目录下的_config.yml文件</p>
 <h5 id="1-1-站点配置"><a href="#1-1-站点配置" class="headerlink" title="1.1 站点配置"></a>1.1 站点配置</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1 # Site</div><div class="line">2 title: myblog   # 网站标题</div><div class="line">3 subtitle:      # 网站子标题</div><div class="line">4 description: 这是一个利用Hexo搭建的博客    # 网站描述</div><div class="line">5 author:  author   # 网站作者，也就是您的名字</div><div class="line">6 language: zh-cn   # 网站使用的语言        </div><div class="line">7 timezone:         # 网站时区。Hexo 预设使用您电脑的时区。</div></pre></td></tr></table></figure>
@@ -579,33 +611,32 @@ pod update --no-repo-update
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INFO Deploy done: git</div></pre></td></tr></table></figure>
 <p>说明我们的博客已经部署成功，github pages可能会存在延时，过几分钟后，就可以通过username.github.io去访问我们的博客了！</p>
 <hr>
-<p><em>本篇主要讲述了使用Hexo进行博客的搭建与配置，以及如何部署到github上，至此我们所有创建博客的工作已经完成。之后便是自己博客的编写与经营了，一些更深入的配置移步<a href="http://icehulu.com/2016/03/02/使用GithubPages-Hexo搭建免费博客（三）/">第三篇</a>吧</em></p>
+<p><em>本篇主要讲述了使用Hexo进行博客的搭建与配置，以及如何部署到github上，至此我们所有创建博客的工作已经完成。之后便是自己博客的编写与经营了，一些更深入的配置移步<a href="http://icehulu.com/2016/03/02/使用GithubPages-Hexo搭建免费博客（三）/" target="_blank" rel="external">第三篇</a>吧</em></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;&lt;img src=&quot;http://7xr7f9.com1.z0.glb.clouddn.com/hexoThemes.png&quot; alt=&quot;Hexo主题&quot;&gt;&lt;/p&gt;
-&lt;p&gt;上篇讲到Hexo的安装，本篇继续，先来说说Hexo安装后的文件结构与功能。&lt;/p&gt;
+      &lt;p&gt;上篇讲到Hexo的安装，本篇继续，先来说说Hexo安装后的文件结构与功能。&lt;/p&gt;
     
     </summary>
     
-      <category term="装逼利器" scheme="http://icehulu.com/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/"/>
+      <category term="装逼利器" scheme="http://lo-ol.cc/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/"/>
     
-      <category term="Hexo" scheme="http://icehulu.com/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/Hexo/"/>
+      <category term="Hexo" scheme="http://lo-ol.cc/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/Hexo/"/>
     
     
-      <category term="博客" scheme="http://icehulu.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="http://lo-ol.cc/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="Hexo" scheme="http://icehulu.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://lo-ol.cc/tags/Hexo/"/>
     
   </entry>
   
   <entry>
     <title>使用GithubPages-Hexo搭建免费博客（一）</title>
-    <link href="http://icehulu.com/2016/02/25/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://icehulu.com/2016/02/25/使用GithubPages-Hexo搭建免费博客（一）/</id>
+    <link href="http://lo-ol.cc/2016/02/25/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://lo-ol.cc/2016/02/25/使用GithubPages-Hexo搭建免费博客（一）/</id>
     <published>2016-02-25T07:53:51.000Z</published>
-    <updated>2016-09-21T06:51:30.000Z</updated>
+    <updated>2017-03-22T16:10:17.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="关于MarkDown"><a href="#关于MarkDown" class="headerlink" title="关于MarkDown"></a>关于MarkDown</h3><p>Markdown 是一种用来写作的轻量级「标记语言」，它用简洁的语法代替排版，而不像一般我们用的字处理软件 Word 或 Pages 有大量的排版、字体设置。它使我们专心于码字，用「标记」语法，来代替常见的排版格式。</p>
 <a id="more"></a>
@@ -690,7 +721,7 @@ pod update --no-repo-update
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-baidu-sitemap --save</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>未完待续，继续请移步<a href="http://icehulu.com/2016/02/26/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89/">这里</a></p>
+<p>未完待续，继续请移步<a href="http://icehulu.com/2016/02/26/%E4%BD%BF%E7%94%A8GithubPages-Hexo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%8D%9A%E5%AE%A2%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank" rel="external">这里</a></p>
 ]]></content>
     
     <summary type="html">
@@ -699,14 +730,14 @@ pod update --no-repo-update
     
     </summary>
     
-      <category term="装逼利器" scheme="http://icehulu.com/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/"/>
+      <category term="装逼利器" scheme="http://lo-ol.cc/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/"/>
     
-      <category term="Hexo" scheme="http://icehulu.com/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/Hexo/"/>
+      <category term="Hexo" scheme="http://lo-ol.cc/categories/%E8%A3%85%E9%80%BC%E5%88%A9%E5%99%A8/Hexo/"/>
     
     
-      <category term="博客" scheme="http://icehulu.com/tags/%E5%8D%9A%E5%AE%A2/"/>
+      <category term="博客" scheme="http://lo-ol.cc/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="Hexo" scheme="http://icehulu.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="http://lo-ol.cc/tags/Hexo/"/>
     
   </entry>
   
